@@ -1,0 +1,131 @@
+function start() {
+    moveToStart();
+    for(var i = 0; i < 6; i++){
+        paintRedLine();
+        turnNorth();
+        move();
+        turnRight();
+        paintWhiteLine();
+    }
+    paintRedLine();
+    
+    turnLeft();
+    for (var i = 0; i < 31; i++){
+        move();
+    }
+    turnLeft();
+    
+    turnLeft();
+    for (var i = 0; i < 18; i ++){
+        move();
+    }
+    turnRight();
+    paintBlueSection();
+}
+
+function moveToStart(){
+    turnNorth();
+    for(var i = 0; i < 7; i++){
+        move();
+    }
+}
+
+function paintRedLine(){
+    turnRight();
+    while(frontIsClear()){
+        paint(Color.red);
+        move();
+    }
+    paint(Color.red);
+    turnNorth();
+    move();
+    turnLeft();
+    while(frontIsClear()){
+        paint(Color.red);
+        move();
+    }
+    paint(Color.red);
+}
+
+function paintWhiteLine(){
+    turnNorth();
+    move();
+    move();
+}
+
+function turnNorth(){
+    while(notFacingNorth()){
+        turnLeft();
+    }
+}
+
+
+function paintBlueSection(){
+    paintBlueRectangle();
+    paintStars();
+}
+
+function paintBlueRectangle(){
+    for (var i = 0; i < 14; i++){
+        paintBlueRow();
+        goToNextRow();
+    }
+}
+
+function paintBlueRow(){
+    for (var i = 0; i < 16; i++){
+        paint(Color.blue);
+        if (frontIsClear()){
+            move();
+        }
+    }
+    paint(Color.blue)
+}
+
+function goToNextRow(){
+    if (facingEast()){
+        turnLeft();
+        move();
+        turnLeft();
+    }else{
+        turnRight();
+        move();
+        turnRight();
+    }
+}
+
+function paintStars(){
+    goToCorner();
+    rowOneOfStars();
+    move();
+    move();
+    move();
+    goToNextRow();
+    for (var i = 0; i < 11; i++){
+        rowOneOfStars();
+        move();
+        move();
+        move();
+        goToNextRow();
+    }
+}
+
+function rowOneOfStars(){
+    move();
+    paint(Color.white);
+    for(var i = 0; i < 3; i++){
+        move();
+        move();
+        move();
+        move();
+        paint(Color.white);
+    }
+}    
+    
+function goToCorner(){
+    turnRight();
+    for (var i = 0; i < 13; i++){
+        move();
+    }
+    turnLeft();
+}
